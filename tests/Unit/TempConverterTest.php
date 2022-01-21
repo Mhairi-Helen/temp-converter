@@ -9,6 +9,18 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class TempConverterTest extends TestCase
 {
+    /**
+     * Set up new application with commnand
+     * 
+     */
+
+    public function setup() : void
+    {   
+        $application = new Application();
+        $application->run();
+        $command = $application->find('app:convert-temp');
+        $commandTester = new CommandTester($command);
+    }
 
     /**
      * Check that Fahrenheit to Celsius conversion works
@@ -17,10 +29,6 @@ final class TempConverterTest extends TestCase
      */
     public function testFahrenheitToCelsuius()
     {
-        $application = new Application();
-
-        $command = $application->find('app:convert-temp');
-        $commandTester = new CommandTester($command);
         $commandTester->execute([
             // pass arguments to the helper
             'value' => '98', 
@@ -36,11 +44,7 @@ final class TempConverterTest extends TestCase
      * @return bool
      */
     public function testCelsuiusToFahrenheit()
-    {
-        $application = new Application();
-
-        $command = $application->find('app:convert-temp');
-        $commandTester = new CommandTester($command);
+    {  
         $commandTester->execute([
             // pass arguments to the helper
             'value' => '36.7', 
@@ -57,11 +61,7 @@ final class TempConverterTest extends TestCase
      * @return bool
      */
     public function testValueValidationError()
-    {
-        $application = new Application();
-
-        $command = $application->find('app:convert-temp');
-        $commandTester = new CommandTester($command);
+    {       
         $commandTester->execute([
             // pass arguments to the helper
             'value' => 'Celsius', 
@@ -80,11 +80,7 @@ final class TempConverterTest extends TestCase
      */
     public function testUnitValidationError()
     {
-        $application = new Application();
-
-        $command = $application->find('app:convert-temp');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute([
+          $commandTester->execute([
             // pass arguments to the helper
             'value' => '98', 
             'unit' => 'foo'
