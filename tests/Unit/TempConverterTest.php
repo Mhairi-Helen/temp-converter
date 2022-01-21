@@ -16,12 +16,7 @@ final class TempConverterTest extends TestCase
 
     public function setup() : void
     {
-        $TempConverterCommand = new TempConverterCommand();
-
-        $application = new Application();
         
-        $application->add($TempConverterCommand);
-        $application->run();
 
     }
 
@@ -32,7 +27,17 @@ final class TempConverterTest extends TestCase
      */
     public function testFahrenheitToCelsuius()
     {
-        $this->assertSame("The temperature is 36.7 Celsius", $TempConverterCommand("98", "Fahrenheit"));
+        $application = new Application();
+
+        $command = $application->find('app:convert-temp');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            // pass arguments to the helper
+            'value' => '98', 
+            'unit' => 'Fahrenheit'
+        ]);
+
+        $this->assertSame("The temperature is 36.7 Celsius", $output);
     }
 
     /**
@@ -42,7 +47,17 @@ final class TempConverterTest extends TestCase
      */
     public function testCelsuiusToFahrenheit()
     {
-        $this->assertSame("The temperature is 98.1 Fahrenheit", $TempConverterCommand("36.7", "Celsius" ));
+        $application = new Application();
+
+        $command = $application->find('app:convert-temp');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            // pass arguments to the helper
+            'value' => '36.7', 
+            'unit' => 'Celsius'
+        ]);
+
+        $this->assertSame("The temperature is 98.1 Fahrenheit", $output);
     }
 
     /**
@@ -53,7 +68,17 @@ final class TempConverterTest extends TestCase
      */
     public function testValueValidationError()
     {
-        $this->assertSame("The first argument, the temperature, must be an number", $TempConverterCommand("Celsius", "Celsius" ));
+        $application = new Application();
+
+        $command = $application->find('app:convert-temp');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            // pass arguments to the helper
+            'value' => 'Celsius', 
+            'unit' => 'Celsius'
+        ]);
+
+        $this->assertSame("The first argument, the temperature, must be an number", $output);
     }
 
     /**
@@ -65,7 +90,17 @@ final class TempConverterTest extends TestCase
      */
     public function testUnitValidationError()
     {
-        $this->assertSame("Sorry, the unit must either be Fahrenheit or Celsius", $TempConverterCommand("98", "Foo" ));
+        $application = new Application();
+
+        $command = $application->find('app:convert-temp');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            // pass arguments to the helper
+            'value' => '98', 
+            'unit' => 'foo'
+        ]);
+        
+        $this->assertSame("Sorry, the unit must either be Fahrenheit or Celsius", $output);
     }
 
 }
