@@ -2,23 +2,13 @@
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Console\App\Commands\TempConverterCommand;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 final class TempConverterTest extends TestCase
 {
-    /**
-     * Set up new application with commnand
-     * 
-     */
-
-    public function setup() : void
-    {
-        
-
-    }
 
     /**
      * Check that Fahrenheit to Celsius conversion works
