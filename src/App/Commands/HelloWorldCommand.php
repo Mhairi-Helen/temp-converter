@@ -21,6 +21,7 @@ class HelloWorldCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+
         $output->writeln("Hello World");
 
         return Command::SUCCESS;

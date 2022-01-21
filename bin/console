@@ -5,8 +5,10 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Console\App\Commands\HelloWorldCommand;
+use Console\App\Commands\TempConverterCommand;
 
 $application = new Application();
 
 $application->add(new HelloWorldCommand());
+$application->add(new TempConverterCommand());
 $application->run();

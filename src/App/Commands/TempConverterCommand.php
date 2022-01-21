@@ -26,18 +26,23 @@ class TempConverterCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): float|int
     {
         $tempValue = $input->getArgument('value');
+        var_dump($tempValue);
         $tempUnit = $input->getArgument('unit');
+        var_dump($tempUnit);
         $convertedTempValue = null;
 
-        if (!is_int($tempValue)) {
+        var_dump($tempUnit != "Celsius");
+        var_dump($tempUnit != "Fahrenheit");
 
-            $returnMessage = 'The Temp Value input must be an integer';
+        if (!is_numeric($tempValue)) {
 
-        } elseif ($tempUnit !== 'Fahrenheit' || $tempUnit !== 'Celsius') {
+            $returnMessage = 'The Temp Value input must be an number';
+
+        } elseif (($tempUnit != "Celsius") && ($tempUnit != "Fahrenheit")) {
 
             $returnMessage = 'Sorry, the unit must either be Fahrenheit or Celsius';
 
-        } elseif ($tempUnit === 'Fahrenheit') {
+        } elseif ($tempUnit === "Fahrenheit") {
 
             $convertedTempValue = round(($tempValue - 32)*5/9, PHP_ROUND_HALF_UP);
 
