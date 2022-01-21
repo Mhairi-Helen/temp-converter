@@ -26,17 +26,12 @@ class TempConverterCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): float|int
     {
         $tempValue = $input->getArgument('value');
-        var_dump($tempValue);
         $tempUnit = $input->getArgument('unit');
-        var_dump($tempUnit);
         $convertedTempValue = null;
-
-        var_dump($tempUnit != "Celsius");
-        var_dump($tempUnit != "Fahrenheit");
 
         if (!is_numeric($tempValue)) {
 
-            $returnMessage = 'The Temp Value input must be an number';
+            $returnMessage = 'The first argument, the temperature, must be an number';
 
         } elseif (($tempUnit != "Celsius") && ($tempUnit != "Fahrenheit")) {
 
