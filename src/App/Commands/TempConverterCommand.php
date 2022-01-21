@@ -50,6 +50,8 @@ class TempConverterCommand extends Command
             $returnMessage = "The temperature is ".$convertedTempValue." Fahrenheit";
         }
 
+        $output->writeln($returnMessage);
+
         return Command::SUCCESS;
     }
 }
